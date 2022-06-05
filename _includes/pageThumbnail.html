@@ -1,0 +1,12 @@
+<a href="/{{ site.base }}/{{ include.post.url }}">
+<div class="page-thumbnail">
+  <span>{{ include.post.title }}</span>
+  <div>
+    {% if include.post.date != nil %}
+      <time datetime="{{ include.post.date | date_to_xmlschema }}">
+        {{ include.post.date | date: "%Y/%m/%d %H:%M:%S" }} の記事
+      </time>
+    {% endif %}
+  </div>
+</div>
+</a>

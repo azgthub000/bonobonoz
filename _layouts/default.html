@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>{% site.title %}</title>
+    <link rel="stylesheet" href="/{{ site.base }}/style.css" type="text/css" />
+    <title>
+      {{ site.title }}
+    </title>
   </head>
   <body>
     <header id="header">
@@ -32,13 +34,31 @@
     <section>
       
       <div class="content-wrap">
-        <time datetime="{% page.date | date_to_xmlschema %}">
-          {% page.date | date: "%Y/%m/%d %H:%M:%S" %} の記事
-        </time>
+        <div class="content-title">
+        {% if page.date != nil %}
+          <time datetime="{{ page.date | date_to_xmlschema }}">
+            {{ page.date | date: "%Y/%m/%d %H:%M:%S" }} の記事
+          </time>
+        {% endif %}
+        </div>
         <div class="content">
-          {% page.content %}
+          {{ page.content }}
         </div>
       </div>
+      {% if page.next != nil or page.previous != nil %}
+        <div class="next-prev-button-wrap">
+          {% if page.next != nil %}
+            <a href="{{ page.next }}">次</a>
+          {% endif %}
+          {% if page.previous != nil %}
+            <a href="{{ page.preious }}">前</a>
+          {% endif %}
+        </div>
+      {% endif %}
+      
+      {% if page.is_page == true %}
+        {% include pages.html %}
+      {% endif %}
 
     </section>
   </body>
